@@ -1,0 +1,413 @@
+<odoo>
+    <data>
+        <template id="custom_invoice_template">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+
+                    <!-- ************ HEADER ************ -->
+                    <div style="width:100%; display:flex; justify-content:space-between; align-items:center; padding-bottom:10px;">
+
+                        <!-- Logo -->
+                        <div style="flex:1; text-align:left;">
+                            <img t-att-src="image_data_uri(o.company_id.logo)" style="width:150px;"/>
+                        </div>
+
+                        <!-- Title -->
+                        <div style="flex:1; text-align:center;">
+                            <h1 style="margin:0; font-size:24px; color:#2c3e50; font-weight:bold;">TAX INVOICE</h1>
+                            <h2 style="margin:0; font-size:16px; color:#2c3e50;">فاتورة ضريبية</h2>
+                        </div>
+
+                        <!-- Invoice Info -->
+                        <div style="flex:1; text-align:right; font-size:11px;">
+                            <img t-if="o._l10n_sa_is_legal() and o.l10n_sa_qr_code_str" class="d-block"
+                                 t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"/>
+                            <p style="margin:0;">Invoice No:
+                                <strong>
+                                    <t t-esc="o.name"/>
+                                </strong>
+                            </p>
+                            <p style="margin:0;">Issue Date:
+                                <strong>
+                                    <t t-esc="o.invoice_date"/>
+                                </strong>
+                            </p>
+                            <p style="margin:0;">Supply Date:
+                                <strong>
+                                    <t t-esc="o.invoice_date_due"/>
+                                </strong>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- ************ SELLER / BUYER INFO ************ -->
+                    <table style="width:100%; border-collapse:collapse; font-size:10px; font-family:'Arial', sans-serif; color:#333;">
+
+                        <style>
+                            .pretty-table th {
+                            background:#f2f2f2;
+                            padding:6px;
+                            border:1px solid #d9d9d9;
+                            font-weight:bold;
+                            }
+                            .pretty-table td {
+                            padding:6px;
+                            border:1px solid #e0e0e0;
+                            }
+                            .pretty-table tr:nth-child(even) td {
+                            background:#fafafa;
+                            }
+                            .pretty-table td, .pretty-table th {
+                            width:12.5%; /* 8 columns, equal width */
+                            }
+                        </style>
+
+                        <thead>
+                            <tr class="pretty-table">
+                                <th style="text-align:left;">Seller</th>
+                                <th></th>
+                                <th style="text-align:right;"></th>
+                                <th style="text-align:right;">البائع</th>
+                                <th style="text-align:left;">Buyer</th>
+                                <th></th>
+                                <th style="text-align:right;"></th>
+                                <th style="text-align:right;">المشتري</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="pretty-table">
+
+                            <tr>
+                                <td>
+                                    <strong>Name</strong>
+                                </td>
+                                <td>Saudi Public Transport Company</td>
+                                <td style="text-align:right;">الشركة السعودية للنقل الجماعي</td>
+                                <td style="text-align:right;">
+                                    <strong>الاسم</strong>
+                                </td>
+                                <td>
+                                    <strong>Name</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.name"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <t t-esc="o.partner_id.x_customer_a_name"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <strong>الاسم</strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>Building No</strong>
+                                </td>
+                                <td>7995</td>
+                                <td style="text-align:right;">7995</td>
+                                <td style="text-align:right;">
+                                    <strong>رقم المبني</strong>
+                                </td>
+                                <td>
+                                    <strong>Building No</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.l10n_sa_edi_building_number"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <t t-esc="o.partner_id.l10n_sa_edi_building_number"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <strong>رقم المبني</strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>Street Name</strong>
+                                </td>
+                                <td>Amr Ibn Ubaid</td>
+                                <td style="text-align:right;">عمرو بن عبيد</td>
+                                <td style="text-align:right;">
+                                    <strong>اسم الشارع</strong>
+                                </td>
+                                <td>
+                                    <strong>Street Name</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.street"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <t t-esc="o.partner_id.x_street_a_name"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <strong>اسم الشارع</strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>District</strong>
+                                </td>
+                                <td>Al Nakheel Dist.</td>
+                                <td style="text-align:right;">حي النخيل</td>
+                                <td style="text-align:right;">
+                                    <strong>اسم الحي</strong>
+                                </td>
+                                <td>
+                                    <strong>District</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.street2"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <t t-esc="o.partner_id.x_district_a_name"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <strong>اسم الحي</strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>City</strong>
+                                </td>
+                                <td>Riyadh</td>
+                                <td style="text-align:right;">رياض</td>
+                                <td style="text-align:right;">
+                                    <strong>اسم المدينة</strong>
+                                </td>
+                                <td>
+                                    <strong>City</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.city"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <t t-esc="o.partner_id.x_city_a_name"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <strong>اسم المدينة</strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>Country</strong>
+                                </td>
+                                <td>Saudi Arabia</td>
+                                <td style="text-align:right;">المملكة العربية السعودية</td>
+                                <td style="text-align:right;">
+                                    <strong>الدولة</strong>
+                                </td>
+                                <td>
+                                    <strong>Country</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.country_id.name"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <t t-esc="o.partner_id.x_country_a_name"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <strong>الدولة</strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>Postal Code</strong>
+                                </td>
+                                <td>12383</td>
+                                <td style="text-align:right;">12383</td>
+                                <td style="text-align:right;">
+                                    <strong>الرقم البريدي</strong>
+                                </td>
+                                <td>
+                                    <strong>Postal Code</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.zip"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <t t-esc="o.partner_id.zip"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <strong>الرقم البريدي</strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>Additional No.</strong>
+                                </td>
+                                <td>4262</td>
+                                <td style="text-align:right;">4262</td>
+                                <td style="text-align:right;">
+                                    <strong>الرقم الاضافي</strong>
+                                </td>
+                                <td>
+                                    <strong>Additional No.</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.l10n_sa_edi_plot_identification"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <t t-esc="o.partner_id.l10n_sa_edi_plot_identification"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <strong>الرقم الاضافي</strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>VAT Number</strong>
+                                </td>
+                                <td>300004441600003</td>
+                                <td style="text-align:right;">300004441600003</td>
+                                <td style="text-align:right;">
+                                    <strong>رقم التسجيل الضريبي</strong>
+                                </td>
+                                <td>
+                                    <strong>VAT Number</strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.vat"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <t t-esc="o.partner_id.vat"/>
+                                </td>
+                                <td style="text-align:right;">
+                                    <strong>رقم التسجيل الضريبي</strong>
+                                </td>
+                            </tr>
+
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <strong>Other Seller ID</strong>-->
+<!--                                </td>-->
+<!--                                <td>CRN - 7001601215</td>-->
+<!--                                <td style="text-align:right;">CRN - 7001601215</td>-->
+<!--                                <td style="text-align:right;">-->
+<!--                                    <strong>معرف آخر</strong>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <strong>Other Buyer ID</strong>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <t t-esc="o.partner_id.l10n_sa_edi_additional_identification_number"/>-->
+<!--                                </td>-->
+<!--                                <td style="text-align:right;">-->
+<!--                                    <t t-esc="o.partner_id.l10n_sa_edi_additional_identification_number"/>-->
+<!--                                </td>-->
+<!--                                <td style="text-align:right;">-->
+<!--                                    <strong>معرف آخر</strong>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+
+                        </tbody>
+                    </table>
+
+                    <!-- ************ LINE ITEMS ************ -->
+                    <h4 style="border-bottom:2px solid #444;font-size:16px;padding-top:15px;margin-bottom:5px;">Line
+                        Items - البنود
+                    </h4>
+                    <table style="border-collapse:collapse; font-size:10px; font-family:'Arial', sans-serif; color:#333;">
+                        <thead>
+                            <tr class="pretty-table" style="text-align:left;">
+                                <th>Service - الخدمة</th>
+                                <th>Description - الوصف</th>
+                                <th>Unit Price - سعر الوحدة</th>
+                                <th>Discount - الخصم</th>
+                                <th>Tax - الضريبة</th>
+                                <th style="text-align:right;">Subtotal (Incl. VAT) - المجموع شامل الضريبة</th>
+                            </tr>
+                        </thead>
+                        <tbody class="pretty-table">
+                            <t t-foreach="o.invoice_line_ids" t-as="line">
+                                <tr>
+                                    <td style="width:15%;">
+                                        <t t-esc="line.product_id.name"/>
+                                    </td>
+                                    <td style="width:35%;">
+                                        <t t-esc="(line.name or '').replace((line.product_id.name or ''), '').strip()"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="'{:,.2f}'.format(line.price_unit)"/>
+                                    </td>
+                                    <td><t t-esc="line.discount"/>%
+                                    </td>
+                                    <td>
+                                        <t t-foreach="line.tax_ids" t-as="tax">
+                                            <t t-esc="tax.name"/>
+                                            <br/>
+                                        </t>
+                                    </td>
+                                    <td style="text-align:right;">
+                                        <t t-esc="'{:,.2f}'.format(line.price_total)"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+
+                    <!-- ************ TOTALS ************ -->
+                    <h4 style="border-bottom:2px solid #444;font-size:16px;padding-top:15px;margin-bottom:5px;">Total
+                        Amounts - اجمالي المبالغ
+                    </h4>
+                    <div style="display:flex; justify-content:flex-end;">
+                        <table style="width:50%; border-collapse:collapse; font-size:12px;">
+                            <tr>
+                                <td style="padding:6px; border:1px solid #ddd;">Total (Excl. VAT) - اجمالي غير شامل
+                                    الضريبة
+                                </td>
+                                <td style="padding:6px; border:1px solid #ddd; text-align:right;">
+                                    <t t-esc="o.currency_id.symbol"/>
+                                    <t t-esc="'{:,.2f}'.format(o.amount_untaxed)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px; border:1px solid #ddd;">Total VAT - اجمالي ضريبة القيمة
+                                    المضافة
+                                </td>
+                                <td style="padding:6px; border:1px solid #ddd; text-align:right;">
+                                    <t t-esc="o.currency_id.symbol"/>
+                                    <t t-esc="'{:,.2f}'.format(o.amount_tax)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px; border:1px solid #ddd; font-weight:bold;">Total Amount - اجمالي
+                                    المبلغ المستحق
+                                </td>
+                                <td style="padding:6px; border:1px solid #ddd; text-align:right; font-weight:bold;">
+                                    <t t-esc="o.currency_id.symbol"/>
+                                    <t t-esc="'{:,.2f}'.format(o.amount_total)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px; border:1px solid #ddd;">Amount Due - اجمالي المبلغ المتبقي</td>
+                                <td style="padding:6px; border:1px solid #ddd; text-align:right;">
+                                    <t t-esc="o.currency_id.symbol"/>
+                                    <t t-esc="'{:,.2f}'.format(o.amount_residual)"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- ************ NOTES ************ -->
+                    <h4 style="border-bottom:2px solid #444;font-size:16px;padding-top:15px;margin-bottom:5px;">Notes -
+                        ملاحظات
+                    </h4>
+                    <div style="padding:5px 0;">
+                        <t t-esc="o.narration"/>
+                    </div>
+
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

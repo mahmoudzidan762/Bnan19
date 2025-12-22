@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <record id="account.account_invoices" model="ir.actions.report">
+            <field name="report_name">invoice_design.custom_invoice_template</field>
+            <field name="report_file">invoice_design.custom_invoice_template</field>
+        </record>
+    </data>
+</odoo>
+
