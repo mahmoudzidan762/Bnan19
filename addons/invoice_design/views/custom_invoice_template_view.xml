@@ -30,7 +30,7 @@
                                 <table style="border-collapse:collapse;border:1px solid black;">
                                     <tr>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
-                                            Invoice No
+                                            Doc No.
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px">
                                             <t t-esc="o.name"/>
@@ -38,7 +38,7 @@
                                     </tr>
                                     <tr>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
-                                            Issue Date
+                                            Doc Date
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px">
                                             <t t-esc="o.invoice_date"/>
@@ -46,10 +46,10 @@
                                     </tr>
                                     <tr>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
-                                            Supply Date
+                                            Vat No.
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px">
-                                            <t t-esc="o.invoice_date_due"/>
+                                            300004441600003
                                         </td>
                                     </tr>
                                 </table>
@@ -75,11 +75,11 @@
                                 <table style="border-collapse:collapse;border:1px solid black;text-align:center;padding-right:1px">
                                     <tr>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
-                                            Bill To:
+                                            Bill To
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px"></td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
-                                            الفاتورة الي:
+                                            الفاتورة الي
                                         </td>
                                     </tr>
                                     <tr>
@@ -87,7 +87,8 @@
                                             Name
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px">Saudi Public
-                                            Transport Company
+                                            Transport Company-
+                                            الشركة السعودية للنقل الجماعي
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             الاسم
@@ -133,11 +134,11 @@
                                 <table style="border-collapse:collapse;border:1px solid black;text-align:center; margin-left:auto; margin-right:0;height:180px;padding-left:1px">
                                     <tr>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
-                                            Ship To:
+                                            Ship To
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;"></td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
-                                            الفاتورة الي:
+                                            الفاتورة الي
                                         </td>
                                     </tr>
                                     <tr>
@@ -145,7 +146,8 @@
                                             Name
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px">
-                                            <t t-esc="o.partner_id.name"/>
+                                            <t t-esc="o.partner_id.name"/>-
+                                            <t t-esc="o.partner_id.x_customer_a_name"/>
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             الاسم
@@ -167,7 +169,11 @@
                                             Address
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px">
-                                            <t t-esc="o.partner_id.contact_address"/>
+                                            <t t-esc="o.partner_id.contact_address"/>-
+                                            <t t-esc="o.partner_id.x_street_a_name"/>-
+                                            <t t-esc="o.partner_id.x_district_a_name"/>-
+                                            <t t-esc="o.partner_id.x_city_a_name"/>-
+                                            <t t-esc="o.partner_id.x_country_a_name"/>-
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             العنوان
@@ -183,11 +189,43 @@
                     <table style="width:100%; border-collapse:collapse; border:1px solid black; text-align:center;">
                         <thead style="background-color:#E1E1E1">
                             <tr>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">Purchase order Number -
+                                    رقم امر الشراء
+                                </th>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">Customer ID - رقم العميل</th>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">Payment Terms - شروط الدفع</th>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">Req Ship Date - تاريخ التوريد</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size:11px;">
+                                <tr>
+                                    <td>
+                                        <t t-esc="o.ref"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.partner_id.ref"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.narration"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o.delivery_date"/>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="padding-top:15px;margin-bottom:5px;"></h4>
+
+                    <table style="width:100%; border-collapse:collapse; border:1px solid black; text-align:center;">
+                        <thead style="background-color:#E1E1E1">
+                            <tr>
                                 <th style="border:1px solid black;font-size:12px;padding:3px">#</th>
                                 <th style="border:1px solid black;font-size:12px;padding:3px">Item and Description -
                                     الصنف
                                 </th>
                                 <th style="border:1px solid black;font-size:12px;padding:3px">QTY - الكمية</th>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">UOM - الوحدة</th>
                                 <th style="border:1px solid black;font-size:12px;padding:3px">Unit Price - سعر الوحدة
                                 </th>
                                 <th style="border:1px solid black;font-size:12px;padding:3px">Dis - الخصم</th>
@@ -204,11 +242,16 @@
                                         <t t-esc="line_index + 1"/>
                                     </td>
                                     <td>
-                                        <t t-esc="line.product_id.name"/>
+                                        <strong>
+                                            <t t-esc="line.product_id.name"/>
+                                        </strong>
                                         <t t-esc="(line.name or '').replace((line.product_id.name or ''), '').strip()"/>
                                     </td>
                                     <td>
                                         <t t-esc="'{:,.2f}'.format(line.quantity)"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="line.product_id.uom_name"/>
                                     </td>
                                     <td>
                                         <t t-esc="'{:,.2f}'.format(line.price_unit)"/>
