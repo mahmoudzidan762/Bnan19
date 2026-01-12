@@ -206,7 +206,7 @@
                                         <t t-esc="o.partner_id.ref"/>
                                     </td>
                                     <td>
-                                        <t t-esc="o.narration"/>
+                                        <t t-esc="o.invoice_payment_term_id.name"/>
                                     </td>
                                     <td>
                                         <t t-esc="o.delivery_date"/>
