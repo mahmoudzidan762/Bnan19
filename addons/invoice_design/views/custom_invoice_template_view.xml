@@ -200,7 +200,7 @@
                         <tbody style="font-size:11px;">
                                 <tr>
                                     <td>
-                                        <t t-esc="o.ref"/>
+                                        <t t-esc="o.purchase_order_number"/>
                                     </td>
                                     <td>
                                         <t t-esc="o.partner_id.ref"/>
