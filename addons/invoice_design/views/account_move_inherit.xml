@@ -10,6 +10,18 @@
                         <field name="purchase_order_number" placeholder="Enter PO No......"/>
                     </group>
                 </xpath>
+
+                <xpath expr="//sheet//notebook//page[1]//field[@name='price_unit']" position="after">
+                    <field name="total_price_without_tax_and_discount" string="Total Price"/>
+                </xpath>
+
+                <xpath expr="//sheet//notebook//page[1]//field[@name='discount']" position="after">
+                    <field name="total_price_after_discount" string="Total A. Disc"/>
+                </xpath>
+
+                <xpath expr="//sheet//notebook//page[1]//field[@name='price_subtotal']" position="replace">
+                    <field name="price_total" string="Amount"/>
+                </xpath>
             </field>
         </record>
     </data>
