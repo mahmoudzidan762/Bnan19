@@ -192,26 +192,31 @@
                                 <th style="border:1px solid black;font-size:12px;padding:3px">Purchase order Number -
                                     رقم امر الشراء
                                 </th>
-                                <th style="border:1px solid black;font-size:12px;padding:3px">Customer ID - رقم العميل</th>
-                                <th style="border:1px solid black;font-size:12px;padding:3px">Payment Terms - شروط الدفع</th>
-                                <th style="border:1px solid black;font-size:12px;padding:3px">Req Ship Date - تاريخ التوريد</th>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">Customer ID - رقم العميل
+                                </th>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">Payment Terms - شروط
+                                    الدفع
+                                </th>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">Req Ship Date - تاريخ
+                                    التوريد
+                                </th>
                             </tr>
                         </thead>
                         <tbody style="font-size:11px;">
-                                <tr>
-                                    <td>
-                                        <t t-esc="o.purchase_order_number"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="o.partner_id.ref"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="o.invoice_payment_term_id.name"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="o.delivery_date"/>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    <t t-esc="o.purchase_order_number"/>
+                                </td>
+                                <td>
+                                    <t t-esc="o.partner_id.ref"/>
+                                </td>
+                                <td>
+                                    <t t-esc="o.invoice_payment_term_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="o.delivery_date"/>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
 
@@ -228,7 +233,13 @@
                                 <th style="border:1px solid black;font-size:12px;padding:3px">UOM - الوحدة</th>
                                 <th style="border:1px solid black;font-size:12px;padding:3px">Unit Price - سعر الوحدة
                                 </th>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">Total Price - اجمالي
+                                    السعر
+                                </th>
                                 <th style="border:1px solid black;font-size:12px;padding:3px">Dis - الخصم</th>
+                                <th style="border:1px solid black;font-size:12px;padding:3px">Total A. Disc - اجمالي بعد
+                                    الخصم
+                                </th>
                                 <th style="border:1px solid black;font-size:12px;padding:3px">Vat% - الضريبة</th>
                                 <th style="border:1px solid black;font-size:12px;padding:3px">Total With VAT - المجموع
                                     شامل الضريبة
@@ -238,35 +249,41 @@
                         <tbody style="font-size:11px;">
                             <t t-foreach="o.invoice_line_ids" t-as="line">
                                 <tr>
-                                    <td>
+                                    <td style="border:1px solid black; padding:3px;">
                                         <t t-esc="line_index + 1"/>
                                     </td>
-                                    <td>
+                                    <td style="border:1px solid black; padding:3px;">
                                         <strong>
                                             <t t-esc="line.product_id.name"/>
                                         </strong>
                                         <t t-esc="(line.name or '').replace((line.product_id.name or ''), '').strip()"/>
                                     </td>
-                                    <td>
+                                    <td style="border:1px solid black; padding:3px;">
                                         <t t-esc="'{:,.2f}'.format(line.quantity)"/>
                                     </td>
-                                    <td>
+                                    <td style="border:1px solid black; padding:3px;">
                                         <t t-esc="line.product_id.uom_name"/>
                                     </td>
-                                    <td>
+                                    <td style="border:1px solid black; padding:3px;">
                                         <t t-esc="'{:,.2f}'.format(line.price_unit)"/>
                                     </td>
-                                    <td>
-                                        <t t-esc="line.discount"/>%
+                                    <td style="border:1px solid black; padding:3px;">
+                                        <t t-esc="line.total_price_without_tax_and_discount"/>
                                     </td>
-                                    <td>
+                                    <td style="border:1px solid black; padding:3px;">
+                                        <t t-esc="line.discount"/>
+                                    </td>
+                                    <td style="border:1px solid black; padding:3px;">
+                                        <t t-esc="line.total_price_after_discount"/>
+                                    </td>
+                                    <td style="border:1px solid black; padding:3px;">
                                         <t t-foreach="line.tax_ids" t-as="tax">
                                             <t t-esc="tax.name"/>
                                             <br/>
                                         </t>
                                     </td>
-                                    <td>
-                                        <t t-esc="'{:,.2f}'.format(line.price_total)"/>
+                                    <td style="border:1px solid black; padding:3px;">
+                                        <t t-esc="line.price_total"/>
                                     </td>
                                 </tr>
                             </t>
@@ -277,65 +294,40 @@
 
                     <table style="width:100%;">
                         <tr>
-                            <!-- Left column: Bank details -->
-                            <td style="width:70%; vertical-align: middle; font-size:12px;">
-                                <table>
-                                    <tr>
-                                        <td style="font-weight:bold; font-size:13px;">
-                                            PLEASE FIND OUR BANK ACCOUNT DETAILS AS BELOW
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bank Name: Alinma Bank</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ACCOUNT NAME: BANAN PROGRAMING Co</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ACCOUNT NUMBER: 68201586726000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>IBAN: SA0605000068201586726000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>SWIFT: INMASARI</td>
-                                    </tr>
-                                </table>
-                            </td>
+                            <td style="width:65%;"></td>
 
-                            <!-- Right column: Totals table (now on the left of its column) -->
-                            <td style="width:30%; vertical-align: middle;">
-                                <table style="border-collapse:collapse; border:1px solid black; text-align:center; height:180px; padding-left:1px; width:100%;">
-                                    <tr style="text-align:center;">
+                            <td style="width:35%; vertical-align:top; text-align:left;">
+                                <table style="border-collapse:collapse; border:1px solid black; text-align:center; height:180px; width:100%;">
+                                    <tr>
                                         <td style="border:1px solid black; font-size:12px; padding:3px; background-color:#E1E1E1;">
-                                            Total (Excl. VAT) - اجمالي غير شامل الضريبة
+                                            Subtotal - اجمالي قبل الخصم
                                         </td>
                                         <td style="border:1px solid black; font-size:12px; padding:3px; text-align:right;">
                                             <t t-esc="o.currency_id.symbol"/>
-                                            <t t-esc="'{:,.2f}'.format(o.amount_untaxed)"/>
+                                            <t t-esc="'{:,.2f}'.format(o.totals_before_discount)"/>
                                         </td>
                                     </tr>
-                                    <tr style="text-align:center;">
+                                    <tr>
                                         <td style="border:1px solid black; font-size:12px; padding:3px; background-color:#E1E1E1;">
-                                            Issue Total VAT - اجمالي ضريبة القيمة المضافة
+                                            S.A. Dis - اجمالي بعد الخصم
+                                        </td>
+                                        <td style="border:1px solid black; font-size:12px; padding:3px; text-align:right;">
+                                            <t t-esc="o.currency_id.symbol"/>
+                                            <t t-esc="'{:,.2f}'.format(o.totals_after_discount)"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black; font-size:12px; padding:3px; background-color:#E1E1E1;">
+                                            VAT Total - اجمالي الضريبة
                                         </td>
                                         <td style="border:1px solid black; font-size:12px; padding:3px; text-align:right;">
                                             <t t-esc="o.currency_id.symbol"/>
                                             <t t-esc="'{:,.2f}'.format(o.amount_tax)"/>
                                         </td>
                                     </tr>
-                                    <tr style="text-align:center;">
+                                    <tr>
                                         <td style="border:1px solid black; font-size:12px; padding:3px; background-color:#E1E1E1;">
-                                            Total Amount - اجمالي المبلغ المستحق
-                                        </td>
-                                        <td style="border:1px solid black; font-size:12px; padding:3px; text-align:right;">
-                                            <t t-esc="o.currency_id.symbol"/>
-                                            <t t-esc="'{:,.2f}'.format(o.amount_total)"/>
-                                        </td>
-                                    </tr>
-                                    <tr style="text-align:center;">
-                                        <td style="border:1px solid black; font-size:12px; padding:3px; background-color:#E1E1E1;">
-                                            Amount Due - اجمالي المبلغ المتبقي
+                                            Total - الصافي شامل الضريبة
                                         </td>
                                         <td style="border:1px solid black; font-size:12px; padding:3px; text-align:right;">
                                             <t t-esc="o.currency_id.symbol"/>
@@ -394,10 +386,13 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>ت: 966 11-417 4616</td>
+                                            <td>ت: 4616 417-11 966</td>
                                         </tr>
                                         <tr>
-                                            <td>البريد الإلكتروني: info@bnansa.com</td>
+                                            <td>:البريد الإلكتروني</td>
+                                        </tr>
+                                        <tr>
+                                            <td>info@bnansa.com</td>
                                         </tr>
                                         <tr>
                                             <td>س.ت 1010497759 عضوية رقم 390128</td>
