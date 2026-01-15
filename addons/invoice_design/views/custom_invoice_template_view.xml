@@ -86,9 +86,9 @@
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             Name
                                         </td>
-                                        <td style="border:1px solid black;font-size:12px;padding:3px">Saudi Public
-                                            Transport Company-
-                                            الشركة السعودية للنقل الجماعي
+                                        <td style="border:1px solid black;font-size:12px;padding:3px">
+                                            <t t-esc="o.partner_id.name"/>-
+                                            <t t-esc="o.partner_id.x_customer_a_name"/>
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             الاسم
@@ -98,8 +98,8 @@
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             Contact
                                         </td>
-                                        <td style="border:1px solid black;font-size:12px;padding:3px">+966 11 2998111
-                                            EXT 1113
+                                        <td style="border:1px solid black;font-size:12px;padding:3px">
+                                            <t t-esc="o.partner_id.phone"/>
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             التواصل
@@ -109,9 +109,12 @@
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             Address
                                         </td>
-                                        <td style="border:1px solid black;font-size:12px;padding:3px">Riyadh, Amr Ibn
-                                            Ubaid, Al Nakheel Dist., Building No. 7995, Unit No. 1, Zip Code. 12383,
-                                            Additional NO.4262
+                                        <td style="border:1px solid black;font-size:12px;padding:3px">
+                                            <t t-esc="o.partner_id.contact_address"/>-
+                                            <t t-esc="o.partner_id.x_street_a_name"/>-
+                                            <t t-esc="o.partner_id.x_district_a_name"/>-
+                                            <t t-esc="o.partner_id.x_city_a_name"/>-
+                                            <t t-esc="o.partner_id.x_country_a_name"/>-
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             العنوان
@@ -121,7 +124,8 @@
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             Vat
                                         </td>
-                                        <td style="border:1px solid black;font-size:12px;padding:3px">300004441600003
+                                        <td style="border:1px solid black;font-size:12px;padding:3px">
+                                            <t t-esc="o.partner_id.vat"/>
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
                                             الرقم الضربيبي
@@ -138,7 +142,7 @@
                                         </td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;"></td>
                                         <td style="border:1px solid black;font-size:12px;padding:3px;background-color:#E1E1E1">
-                                            الفاتورة الي
+                                            الشحن الي
                                         </td>
                                     </tr>
                                     <tr>
