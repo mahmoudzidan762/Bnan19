@@ -2,4 +2,3 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_res_partner,access_res_partner,model_res_partner,,1,1,1,1
 access_account_move,access_account_move,model_account_move,,1,1,1,1
 access_account_move_line,access_account_move_line,model_account_move_line,,1,1,1,1
-access_product_product,access_product_product,model_product_product,,1,1,1,1

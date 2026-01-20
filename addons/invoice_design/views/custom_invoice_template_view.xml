@@ -261,9 +261,10 @@
                                             <t t-esc="'('+line.product_id.default_code+')'"/>
                                         </strong>
                                         <br/>
-                                        <t t-esc="line.product_id.arabic_part"/>
-                                        <br/>
-                                        <t t-esc="line.product_id.non_arabic_part"/>
+                                        <t t-foreach="o.names" t-as="name">
+                                            <t t-esc="name"/>
+                                            <br/>
+                                        </t>
                                     </td>
                                     <td style="border:1px solid black; padding:3px;">
                                         <t t-esc="'{:,.2f}'.format(line.quantity)"/>
