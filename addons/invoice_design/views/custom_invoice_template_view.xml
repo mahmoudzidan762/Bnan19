@@ -258,9 +258,10 @@
                                     </td>
                                     <td style="border:1px solid black; padding:3px;">
                                         <strong>
-                                            <t t-esc="line.product_id.name"/>
+                                            <t t-esc="'('+line.product_id.default_code+')'"/>
                                         </strong>
-                                        <t t-esc="(line.name or '').replace((line.product_id.name or ''), '').strip()"/>
+                                        <br/>
+                                        <t t-esc="line.product_id.name"/>
                                     </td>
                                     <td style="border:1px solid black; padding:3px;">
                                         <t t-esc="'{:,.2f}'.format(line.quantity)"/>
